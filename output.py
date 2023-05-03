@@ -1,27 +1,11 @@
-import paramiko
 import subprocess
-import os
-import json
 from decimal import *
+import sys
+import codecs
 
-# 读取配置文件
-# config_path = os.getcwd() + os.sep + 'config.json'
-# with open(config_path) as T:
-#     config = json.loads(T.read())
-
-# 建立SSH连接
-# IP_address = config['IP_address']
-# username = config['username']
-# password = config['password']
-# ssh = paramiko.SSHClient()
-# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-# ssh.connect(IP_address,username,password)
+sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
 # 发起检测命令
-# stdin, stdout, stderr = ssh.exec_command("sudo -s")
-# pswd = '{}\n'.format(password)
-# stdin.write(pswd)
-# stdin,stdout, stderr = ssh.exec_command('sudo inspec exec cis-docker-benchmark')
 p = subprocess.Popen(["inspec", "exec", "cis-docker-benchmark"], stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
 
 # 获取检测结果
